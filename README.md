@@ -37,6 +37,7 @@ To create a workflow using this step, you can use the StackGuardian Workflow as 
 ### Example Workflow Configuration
 
 ```json
+```json
 {
   "Approvers": [],
   "DeploymentPlatformConfig": [
@@ -44,15 +45,15 @@ To create a workflow using this step, you can use the StackGuardian Workflow as 
       "config": {
         "integrationId": "/integrations/cloud-connector"
       },
-      "kind": "AWS_OIDC"
+      "kind": "CLOUD_PROVIDER_KIND"
     }
   ],
   "WfType": "CUSTOM",
   "EnvironmentVariables": [
     {
       "config": {
-        "textValue": "example-resource-group",
-        "varName": "ARM_RESOURCE_GROUP"
+        "textValue": "example-value",
+        "varName": "ENV_VAR_NAME"
       },
       "kind": "PLAIN_TEXT"
     }
@@ -61,14 +62,14 @@ To create a workflow using this step, you can use the StackGuardian Workflow as 
     "iacVCSConfig": {
       "useMarketplaceTemplate": false,
       "customSource": {
-        "sourceConfigDestKind": "GITHUB_COM",
+        "sourceConfigDestKind": "VCS_PROVIDER",
         "config": {
           "includeSubModule": false,
           "ref": "main",
           "gitCoreAutoCRLF": false,
-          "auth": "/integrations/github_com",
+          "auth": "/integrations/vcs-provider",
           "workingDir": "",
-          "repo": "https://github.com/example/example-repo",
+          "repo": "https://vcs-provider.com/example-repo",
           "isPrivate": true
         }
       }
@@ -76,7 +77,7 @@ To create a workflow using this step, you can use the StackGuardian Workflow as 
     "iacInputData": {
       "schemaType": "RAW_JSON",
       "data": {
-        "storageAccount": "examplestorageaccount"
+        "exampleKey": "exampleValue"
       }
     }
   },
@@ -87,12 +88,12 @@ To create a workflow using this step, you can use the StackGuardian Workflow as 
     "type": "shared"
   },
   "Description": "Example workflow for deploying with a custom workflow step",
-  "ResourceName": "deploy-storage-account",
+  "ResourceName": "example-resource-name",
   "WfStepsConfig": [
     {
       "name": "custom-wf-step",
       "mountPoints": [],
-      "wfStepTemplateId": "/stackguardian/example-wf-step:3",
+      "wfStepTemplateId": "/stackguardian/example-wf-step:version",
       "wfStepInputData": {
         "schemaType": "FORM_JSONSCHEMA",
         "data": {
@@ -105,10 +106,14 @@ To create a workflow using this step, you can use the StackGuardian Workflow as 
   ]
 }
 ```
+```
 
 This JSON payload defines a workflow that runs using a custom workflow step template. It includes:
+- **Approvers**: List of users who need to approve the workflow.
 - **Deployment platform configuration**: Defines a Cloud Connector.
-- **VCS configuration**: Links the workflow to a GitHub repository.
+- **Environment variables**: Specifies environment variables required for the workflow.
+- **VCS configuration**: Links the workflow to a Git repository using a VCS Connector.
+- **Runner constraints**: Specifies the type of runner to use: shared or private.
 - **Workflow steps**: Configures the workflow step with necessary parameters.
 
-For more advanced configurations and additional parameters, visit the [StackGuardian documentation](https://docs.stackguardian.io/docs/deploy/workflows/create_workflow/json/#using-workflow-as-code).
+To get started with using this template, register on StackGuardian and create an organization, visit the [StackGuardian documentation](https://docs.stackguardian.io/docs/getting-started/setup/).
