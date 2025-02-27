@@ -1,0 +1,46 @@
+{
+  "type": "object", 
+  "title": "Example Workflow Step SG noCode Form",
+  "description": "This is an example workflow step schema that demonstrates common field types and configurations",
+  "properties": {
+    "stringField": {
+      "type": "string",
+      "title": "Text Input",
+      "description": "A basic text input field. Example: 'some-value'"
+    },
+    "enumField": {
+      "type": "string", 
+      "title": "Dropdown Selection",
+      "description": "A dropdown field with predefined options:\n- 'Option 1': First choice\n- 'Option 2': Second choice",
+      "enumNames": ["Option 1", "Option 2"],
+      "enum": ["opt1", "opt2"]
+    },
+    "enumFieldSimple": {
+      "type": "string",
+      "title": "Simple Dropdown",
+      "description": "A simple dropdown without separate display names",
+      "enum": ["Choice1", "Choice2", "Choice3"]
+    },
+    "numberField": {
+      "type": "number",
+      "title": "Numeric Input",
+      "description": "A field that accepts numeric values. Example: 42"
+    },
+    "booleanField": {
+      "type": "boolean", 
+      "title": "Toggle Switch",
+      "description": "A true/false toggle field"
+    },
+    "optionalTextField": {
+      "type": "string",
+      "title": "Optional Text",
+      "description": "An optional text field that isn't required"
+    },
+    "additionalParams": {
+      "type": "string",
+      "title": "Additional Parameters",
+      "description": "Any additional parameters as a string. Example: '--param1 value1 --param2 value2'"
+    }
+  },
+  "required": ["stringField", "enumField", "numberField"]
+}
